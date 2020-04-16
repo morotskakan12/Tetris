@@ -1,0 +1,103 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.Group?>
+<GridPane
+        fx:controller="sample.Controller"
+        xmlns:fx="http://javafx.com/fxml"
+        alignment="center" >
+    <children>
+        <BorderPane
+                stylesheets="/sample/styl.css"
+                prefHeight="575"
+                prefWidth="440"
+        >
+            <top>
+                <GridPane
+                        fx:id="_gridTop"
+                        alignment="CENTER"
+                >
+                    <HBox
+                            fx:id="_hboxTop"
+                    >
+                    <ImageView
+                            fx:id="_imageViewTop"
+                            fitHeight="40"
+                            fitWidth="150"
+                            pickOnBounds="true"
+                            preserveRatio="true"
+                    >
+                        <image>
+                            <Image
+                                    url="/sample/bild.jpg"
+                                    backgroundLoading="true"
+                            />
+                        </image>
+                    </ImageView>
+                    </HBox>
+                </GridPane>
+            </top>
+            <center            >
+                <fx:define>
+                    <fx:include
+                            source="gameFinalScreen.fxml"
+                            fx:id="center"
+                    >
+
+                    </fx:include>
+                </fx:define>
+
+                <TabPane>
+                   <Tab content="$center" text="hej">
+                   </Tab>
+
+               </TabPane>
+            </center>
+            <bottom>
+                <GridPane
+                        fx:id="_gridBottom"
+                ></GridPane>
+            </bottom>
+            <left>
+                <GridPane
+                        fx:id="_gridLeft"
+                        alignment="CENTER">
+                    <VBox
+                            fx:id="_vboxLeft"
+                    >
+                        <Pane
+                                fx:id="_peneLeft"
+                        ></Pane>
+                        <Pane
+                                fx:id="_peneLeft2"
+                        ></Pane>
+                    </VBox>
+                </GridPane>
+            </left>
+            <right>
+                <GridPane
+                        fx:id="_gridRight"
+                        alignment="CENTER"
+                >
+                    <VBox fx:id="_vboxRhigt">
+                        <Pane
+                                fx:id="_peneRhigt"
+                        ></Pane>
+                        <Pane
+                                fx:id="_peneRhigt2"
+                        ></Pane>
+                    </VBox>
+                </GridPane>
+            </right>
+        </BorderPane>
+    </children>
+</GridPane>

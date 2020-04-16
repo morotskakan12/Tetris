@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.gridTop{
+    -fx-background-color: #d600ff;
+    -fx-pref-height: 50;
+    -fx-pref-width: 300;
+}
+.hboxTop{
+    -fx-pref-height: 40;
+    -fx-pref-width: 150;
+}
+.gridBottom{
+    -fx-background-color: #9b30ff;
+    -fx-pref-height: 25;
+    -fx-pref-width: 300;
+}
+.gridLeft{
+    -fx-background-color: #d3b7ff;
+    -fx-pref-height: 500;
+    -fx-pref-width: 70;
+}
+.gridRiht{
+    -fx-background-color: #d3b7ff;
+    -fx-pref-height: 500;
+    -fx-pref-width: 70;
+}
+.peneRhigt{
+    -fx-background-color: #b23aee;
+    
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;}
+.peneRhigt2{
+    -fx-background-color: #b23aee;
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;
+}
+.peneRLeft2{
+    -fx-background-color: #b23aee;
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;
+}
+.peneRLeft{
+    -fx-background-color: #b23aee;
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;
+
+}
+.vboxCenterGameSeting{
+
+    -fx-pref-height: 300;
+    -fx-pref-width: 250;
+}
+.buttonCenterGameStart{
+
+    -fx-pref-height: 40;
+    -fx-pref-width: 175;
+    -fx-min-height: 40;
+}
+.buttonCenterGemeLevel{
+    
+    -fx-pref-height: 40;
+    -fx-pref-width: 175;
+    -fx-min-height: 40;
+}
+.buttonCneterExit{
+    
+    -fx-pref-height: 40;
+    -fx-pref-width: 175;
+    -fx-min-height: 40;
+}
+.gridCenter{
+
+    -fx-background-color: #b23aee;
+    -fx-pref-height: 500;
+    -fx-pref-width: 300;
+}
+.gameFild{
+    -fx-min-height: 500;
+    -fx-min-width: 250;
+    -fx-max-height: 500;
+    -fx-max-width: 250;
+    -fx-background-color: #000000;
+}
+
+
