@@ -1,51 +1,86 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.layout.BorderPane;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
+import java.io.IOException;
 
 
 public class PlyeBordControler {
     @FXML
-    BorderPane _contaner;
-
-
+    GridPane _contaner;
     @FXML
     GridPane _gameFild;
 
     Pane _gameFildContent = new Pane();
-    public void initialize() {
+    public void initialize() throws IOException {
 
         _gameFild.getStyleClass().add("gameFild");
 
-            for(int i = 0; i <= 250; i = i + 25 ) {
-                _gameFildContent = PlyeBordBox(_gameFildContent, i, 0);
+        time();
+        for(int i = 0; i <= 9; i++ ) {
+            for (int e = 0; e <= 19; e++){
+                _gameFild =  plyeBordBox(_gameFild, i , e);
+
             }
-           for(int i = 0; i <500;i = i + 25)       {
-                _gameFildContent = PlyeBordBox(_gameFildContent,0,i ) ;
-            }
-            _gameFild.getChildren().add(_gameFildContent);
+        }
+
     }
-    public static Pane PlyeBordBox(Pane temp, int positonX,int positonY ){
-        Rectangle rectangle = new Rectangle();
-        rectangle.setFill(Color.rgb(80,80,80));
+    public static GridPane plyeBordBox (GridPane _gameFild, int i, int e){
+        Rectangle temp = new Rectangle();
+        temp.setFill(Color.BLACK);
+        temp.setStroke(Color.RED);
+        temp.setStrokeWidth(0.5);
+        temp.setHeight(24.5);
+        temp.setWidth(24.5);
+        _gameFild.add(temp,i,e);
 
-            if (positonY == 0) {
-                rectangle.setHeight(500);
-                rectangle.setWidth(1);
-            }else {
+        return _gameFild;
+    }
 
-                rectangle.setHeight(1);
-                rectangle.setWidth(250);
-            }
-        rectangle.setX(positonX);
-        rectangle.setY(positonY);
-        temp.getChildren().add(rectangle);
+
+    public void time() throws IOException {
+
+        Timeline timeline1 = new Timeline(new KeyFrame(
+                Duration.seconds(2),
+                ae -> {
+                    _gameFild = addBlock(_gameFild);
+                }));
+       Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(20),
+                ae -> {
+                    try {
+                        chenge();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }));
+
+        timeline1.play();
+        timeline.play();
+    }
+    public void chenge() throws IOException {
+        GridPane pene = FXMLLoader.load(getClass().getResource("gameFinalScreen.fxml"));
+        _contaner.getChildren().setAll(pene);
+    }
+    public GridPane addBlock(GridPane _gameFild){
+
+        _gameFild.add(block(),0 ,0);
+
+        return _gameFild;
+    }
+
+    public Rectangle block(){
+        Rectangle temp = new Rectangle();
+        temp.getStyleClass().add("tempBlock");
+        temp.setStyle("-fx-background-color: #d3b7ff");
         return temp;
     }
 

@@ -8,19 +8,19 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<BorderPane
+<GridPane
         stylesheets="/sample/styl.css"
         xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.GameFinalScreenControler"
-            prefHeight="500.0" prefWidth="300.0"
+        fx:id="_fanalGridPane"
 >
-    <center>
+
 
 
             <VBox
 
-                    fx:id="_vboxCenterGameSeting"
+                    fx:id="_vboxCenterGameFinal"
                     alignment="CENTER"
             >
                 <ImageView
@@ -40,14 +40,14 @@
                 </ImageView>
 
                 <Button
-                        fx:id="_buttonCenterGameStart"
-                        text="Start"
-                        onAction="#onButtonCenterGemeStart"
+                        fx:id="_buttonCenterGameRestart"
+                        text="Restart game"
+                        onAction="#onButtonCenterGemeRetart"
                 ></Button>
                 <Button
-                        fx:id="_buttonCenterGemeLevel"
-                        text="Level"
-                        onAction="#onButtonCenterGemeLevel"
+                        fx:id="_buttonCenterStartPage"
+                        text="To startPage"
+                        onAction="#onButtonCenterStartPage"
                 ></Button>
                 <Button
                         fx:id="_buttonCneterExit"
@@ -56,5 +56,5 @@
                 ></Button>
 
         </VBox>
-    </center>
-</BorderPane>
+
+</GridPane>

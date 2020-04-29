@@ -11,10 +11,13 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.layout.AnchorPane?>
 <GridPane
         fx:controller="sample.Controller"
         xmlns:fx="http://javafx.com/fxml"
-        alignment="center" >
+        alignment="center"
+
+>
     <children>
         <BorderPane
                 stylesheets="/sample/styl.css"
@@ -46,21 +49,18 @@
                     </HBox>
                 </GridPane>
             </top>
-            <center            >
-                <fx:define>
-                    <fx:include
-                            source="gameFinalScreen.fxml"
-                            fx:id="center"
+            <center>
+
+                    <GridPane
+                            xmlns="http://javafx.com/javafx"
+                            xmlns:fx="http://javafx.com/fxml"
+                            fx:id="_gridCenter"
+                            alignment="CENTER"
                     >
 
-                    </fx:include>
-                </fx:define>
+                    </GridPane>
 
-                <TabPane>
-                   <Tab content="$center" text="hej">
-                   </Tab>
 
-               </TabPane>
             </center>
             <bottom>
                 <GridPane

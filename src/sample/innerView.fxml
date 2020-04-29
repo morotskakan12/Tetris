@@ -15,6 +15,7 @@
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="sample.innerViewControler"
         fx:id="_gridCenter"
+        alignment="CENTER"
 
 
     >

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane
+<GridPane
         stylesheets="/sample/styl.css"
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
@@ -14,13 +14,11 @@
         fx:id="_contaner"
 
 >
-    <center>
         <GridPane
                 fx:id="_gameFild"
                 alignment="CENTER"
         >
+
         </GridPane>
-    </center>
 
-
-</BorderPane>
+</GridPane>
