@@ -22,8 +22,7 @@ public class Controller {
     HBox _hboxTop;
     @FXML
     ImageView _imageViewTop;
-    @FXML
-    GridPane _test;
+
     @FXML
     GridPane _gridLeft;
     @FXML
