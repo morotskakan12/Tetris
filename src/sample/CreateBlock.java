@@ -1,9 +1,12 @@
 package sample;
 
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class CreateBlock extends BlockAbstrakt {
@@ -23,10 +26,10 @@ public class CreateBlock extends BlockAbstrakt {
             typsOfGemeBrick.add(new blockOrange());//klar 4
             typsOfGemeBrick.add(new blockRed());//klar 5
             typsOfGemeBrick.add(new blockWhite());//klar 6
-            BlockAbstrakt block = typsOfGemeBrick.get(setRandomNUmber());
+            BlockAbstrakt block = typsOfGemeBrick.get(1);
 
             _gameBord = block.blockLayout(_gameBord,5,0);
-
+            _gameBord = test(_gameBord);
             return _gameBord;
         }
         public int  setRandomNUmber(){
