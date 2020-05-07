@@ -14,11 +14,10 @@
         fx:id="_contaner"
 
 >
-        <GridPane
+        <Pane
                 fx:id="_gameFild"
-                alignment="CENTER"
         >
 
-        </GridPane>
+        </Pane>
 
 </GridPane>
