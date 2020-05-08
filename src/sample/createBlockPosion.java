@@ -7,8 +7,11 @@ public class createBlockPosion extends PositonAbstrakt {
     public int[][] blockPositon(int[][] positonArry, int horizontally, int vertical) {
         for(int i = horizontally; i <20;i++){
             for(int e = vertical; e <10;e++){
-                positonArry = setPositon(positonArry,i,e,0);
-
+                if(i == 19){
+                    positonArry = setPositon(positonArry,i,e,1);
+                }else {
+                    positonArry = setPositon(positonArry, i, e, 0);
+                }
             }
         }
 

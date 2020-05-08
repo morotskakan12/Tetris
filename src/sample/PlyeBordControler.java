@@ -50,47 +50,60 @@ public class PlyeBordControler {
         positonArry = cbp.blockPositon(positonArry,0,0);
         printArry(positonArry);
                 _gameFild.getChildren().add(_block);
+       for(int i = 0; i<2;i++){
         this.time();
+       }
+
 
 
     }
 
 
     public void time() {
+        numBlock = setRandomNumber();
+        vertical = 0;
+        horizontally = 4;
 
         Timeline timeline1 = new Timeline();
 
         timeline1.setCycleCount(Timeline.INDEFINITE);
 
         timeline1.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(3),
+                Duration.seconds(2),
                 ae -> {
-                    numBlock = 2;
-                    vertical = 0;
-                    horizontally = 0;
+
                     _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
 
                     positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
                     printArry(positonArry);
-                    positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
-                    printArry(positonArry);
+                    if ((cbp.getPositonValu(positonArry,horizontally+2,vertical+2)==1)){
+                        timeline1.stop();
+                    }else {
+                        Timeline timeline2 = new Timeline();
+                        timeline2.getKeyFrames().add(new KeyFrame(
+                                Duration.seconds(1),
+                                e -> {
+                        _block = cbg.removBlockLayout(_block,horizontally,vertical);
+                        positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
+                        printArry(positonArry);}));
+                        timeline2.play();
+                    }
+                                            vertical++;
+
+                    System.out.println(vertical);
+
+
                     /*numRot = numRot+90;
                     rot(_block,numRot);*/
                 }));
-        Timeline timeline2 = new Timeline();
-
-        timeline2.setCycleCount(Timeline.INDEFINITE);
-
-        timeline2.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(2),
-                ae -> {
-                    _block = cbg.removBlockLayout(_block,5,5);
-
-                }));
 
 
-       Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(20),
+
+
+
+
+     Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(30),
                 ae -> {
                     try {
                         chenge();
@@ -101,7 +114,7 @@ public class PlyeBordControler {
 
 
         timeline1.playFromStart();
-        timeline2.playFromStart();
+
 
         timeline.play();
     }
