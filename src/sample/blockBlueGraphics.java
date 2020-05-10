@@ -11,6 +11,8 @@ public class blockBlueGraphics extends BlockAbstrakt {
     public Pane blockLayout(Pane _gameBord, int horizontally, int vertical) {
         for (int i = horizontally;i <= horizontally;i = i+25){
             for(int e = vertical;e <= vertical+(3*25); e=e+25 ){
+
+
                 _gameBord = setBlock(_gameBord,i,e, Color.rgb(55,107,229),Color.rgb(115,11,11));
             }
         }

@@ -38,4 +38,32 @@ abstract class BlockAbstrakt {
 
         return _gameBord;
     }
+    public double[][] rotate(int horizontally, int vertical,double angle){
+        double [][] results = new double [1][2];
+        double [][] matrix = new double[2][2];
+        results[0][0]=(double)horizontally;
+        results[0][1]=(double)vertical;
+        matrix[0][0]=Math.round(Math.cos(angle));
+        matrix[1][0]=-(Math.sin(angle));
+        matrix[0][1]=Math.sin(angle);
+        matrix[1][1]=Math.round(Math.cos(angle));
+        results[0][0]=(matrix[0][0]*results[0][0])+(matrix[0][1]*results[0][0]);
+        results[0][1]=(matrix[1][0]*results[0][1])+(matrix[1][1]*results[0][1]);
+        if (angle ==Math.PI) {
+/*
+                results[0][0]= results[0][0]+(2*horizontally);
+                results[0][1]=results[0][1]+(2*vertical);
+        */
+        }else if(angle == Math.PI/2) {
+
+
+            results[0][1] = results[0][1] + (2 * vertical);
+
+        }else if(angle ==((3*Math.PI)/(2))){
+                results[0][0]= results[0][0]+(2*vertical);
+                results[0][1]=results[0][1]+(2*vertical);
+        }
+
+        return results;
+    }
 }

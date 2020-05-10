@@ -34,7 +34,7 @@ public class PlyeBordControler {
     Pane _block = new Pane();
     createBlockGraphics cbg = new createBlockGraphics();
     createBlockPosion cbp = new createBlockPosion();
-    int[][] positonArry = new int[20][10];
+    int[][] positonArry = new int[10][21];
     int numRot;
     int numBlock;
     int horizontally;
@@ -50,19 +50,20 @@ public class PlyeBordControler {
         positonArry = cbp.blockPositon(positonArry,0,0);
         printArry(positonArry);
                 _gameFild.getChildren().add(_block);
-       for(int i = 0; i<2;i++){
-        this.time();
+
+          this.time();
+
        }
 
 
 
-    }
+
 
 
     public void time() {
-        numBlock = setRandomNumber();
+        numBlock = 4;
         vertical = 0;
-        horizontally = 4;
+        horizontally = 0;
 
         Timeline timeline1 = new Timeline();
 
@@ -76,34 +77,33 @@ public class PlyeBordControler {
 
                     positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
                     printArry(positonArry);
-                    if ((cbp.getPositonValu(positonArry,horizontally+2,vertical+2)==1)){
+                    System.out.println(cbp.emtyPositon(positonArry,horizontally,vertical));
+                    if ((cbp.getPositonValu(positonArry,horizontally,vertical+2)==1)){
+                        printArry(positonArry);
                         timeline1.stop();
                     }else {
                         Timeline timeline2 = new Timeline();
                         timeline2.getKeyFrames().add(new KeyFrame(
                                 Duration.seconds(1),
                                 e -> {
-                        _block = cbg.removBlockLayout(_block,horizontally,vertical);
-                        positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
+                        _block = cbg.removBlockLayout(_block,horizontally,vertical-1);
+                        positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical-1);
                         printArry(positonArry);}));
                         timeline2.play();
                     }
                                             vertical++;
+
 
                     System.out.println(vertical);
 
 
                     /*numRot = numRot+90;
                     rot(_block,numRot);*/
-                }));
-
-
-
-
+               }));
 
 
      Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(30),
+                Duration.seconds(60),
                 ae -> {
                     try {
                         chenge();
@@ -113,10 +113,10 @@ public class PlyeBordControler {
                 }));
 
 
-        timeline1.playFromStart();
+       timeline1.playFromStart();
 
 
-        timeline.play();
+        //timeline.play();
     }
 
 
@@ -130,17 +130,17 @@ public class PlyeBordControler {
         return block;
     }
     public void printArry(int [][] positonArry){
-        for (int i = 0; i < 21; i++) {
 
-            for (int j = 0; j < 10; j++) {
 
-                if (i == 20){
-                    System.out.print(j+" ");
+            for (int j = 0; j < 21; j++) {
+                for (int i = 0; i < 10; i++) {
+                if (j == 20){
+                    System.out.print(i+" ");
                 }else
                     System.out.print(positonArry[i][j]+" ");
             }
-            if(i!=20){
-                System.out.println(i);
+            if(j!=20){
+                System.out.println(j);
             }
         }
         System.out.println(" ");
