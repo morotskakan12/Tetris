@@ -39,11 +39,14 @@ public class PlyeBordControler {
     int numBlock;
     int horizontally;
     int vertical;
+    Button upp = new Button();
+    Button höger =new Button();
+    Button venster = new Button();
+    Button ner = new Button();
     public void initialize() throws IOException {
         _gameFild.setMinWidth(250);
         _gameFild.setMinHeight(500);
         _gameFild.getStyleClass().add("gameFild");
-
 
 
         cbg.setGameBord(_gameFild);
@@ -150,8 +153,58 @@ public class PlyeBordControler {
         return (int)(Math.random() * ((6) + 1));
     }
 
+    public void handle(ActionEvent event) {
+        if(event.getSource() == upp){
+
+            _block = cbg.removBlockLayout(_block,horizontally,vertical);
+            positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
+            if(numRot== 4){
+                numRot = 0;
+
+            }else {
+                numRot++;
+            }
+            _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
+            positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
+        }
+        if(event.getSource() == ner){
+
+            _block = cbg.removBlockLayout(_block,horizontally,vertical);
+            positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
+                 while (cbp.getPositonValu(positonArry,horizontally,vertical+1)==0){
+                    vertical++;
+
+                }
+            _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
+            positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
+        }
+        if(event.getSource() == höger){
+            if (cbp.getPositonValu(positonArry,horizontally+1,vertical)==0) {
+                _block = cbg.removBlockLayout(_block, horizontally, vertical);
+                positonArry = cbp.removBlockPositon(positonArry, horizontally, vertical);
+
+                horizontally++;
+
+                _block = cbg.getGemeBlock(_block, horizontally, 19, numBlock);
+                positonArry = cbp.getGemeBlock(positonArry, horizontally, 19, numBlock);
+            }
+        }
+        if(event.getSource() == venster){
+            if (cbp.getPositonValu(positonArry,horizontally-1,vertical)==0){
+                _block = cbg.removBlockLayout(_block, horizontally, vertical);
+                positonArry = cbp.removBlockPositon(positonArry, horizontally, vertical);
+
+                horizontally--;
+
+                _block = cbg.getGemeBlock(_block, horizontally, 19, numBlock);
+                positonArry = cbp.getGemeBlock(positonArry, horizontally, 19, numBlock);
+            }
+        }
+
+    }
 
 
 
 }
+
 

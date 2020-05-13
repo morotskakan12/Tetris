@@ -13,7 +13,7 @@ public class blockOrangePositon extends PositonAbstrakt {
                     double [][] temp = new double[0][1];
                     int temp1 = i;
                     int temp2 = e;
-                    temp = rotate(temp1,temp2,0);
+                    temp = rotate(temp2,temp1,Math.PI/2);
                     temp1 = (int)temp[0][1];
                     temp2 = (int)temp[0][0];
 
