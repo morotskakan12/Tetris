@@ -25,43 +25,27 @@ abstract class PositonAbstrakt  {
 
         return positonArry[horizontally][vertical];
     }
-    public double[][] rotate(int horizontally, int vertical,double angle){
+    public double[][] rotate(int horizontally, int vertical,double angle,int [][] pivital){
         double [][] results = new double [1][2];
+        double [][] temp = new double[1][2];
         double [][] matrix = new double[2][2];
-        results[0][0]=(double)horizontally;
-        results[0][1]=(double)vertical;
+        temp[0][0] = horizontally;
+        temp[0][1] = vertical;
+
+        temp[0][0] = temp[0][0] - pivital[0][0];
+        temp[0][1] = temp[0][1] - pivital[0][1];
+
         matrix[0][0]=Math.round(Math.cos(angle));
         matrix[1][0]=Math.round(-(Math.sin(angle)));
         matrix[0][1]=Math.round(Math.sin(angle));
         matrix[1][1]=Math.round(Math.cos(angle));
-        System.out.println(matrix[0][0]+" matrix[0][0]");
-        System.out.println(matrix[1][0]+" matrix[1][0]");
-        System.out.println(matrix[0][1]+" matrix[0][1]");
-        System.out.println(matrix[1][1]+" matrix[1][1]");
-        results[0][0]=((matrix[0][0]*results[0][0])+(matrix[0][1]*results[0][0]));
-        results[0][1]=((matrix[1][0]*results[0][1])+(matrix[1][1]*results[0][1]));
 
-        System.out.println(results[0][0]+" "+"positon of rotate x");
-        System.out.println(results[0][1]+" "+"positon of rotate y");
-            if (angle ==Math.PI) {
-/*
-                results[0][0] = (results[0][0] + (2 * horizontally));
-                results[0][1] = (results[0][1] + (2 * vertical));
-*/
-                System.out.println(results[0][0]+" "+"after diff x");
-                System.out.println(results[0][1]+" "+"after diff y");
+        results[0][0]=((matrix[0][0]*temp[0][0])+(matrix[1][0]*temp[0][1]));
+        results[0][1]=((matrix[0][1]*temp[0][0])+(matrix[1][1]*temp[0][1]));
 
-            }else if(angle == Math.PI/2) {
-                results[0][1] = results[0][1] + (2 * vertical);
+        results[0][0] = results[0][0] + pivital[0][0];
+        results[0][1] = results[0][1] + pivital[0][1];
 
-                System.out.println(results[0][0]+" "+"after diff x");
-                System.out.println(results[0][1]+" "+"after diff y");
-            }else if(angle ==((3*Math.PI)/(2))){
-
-                results[0][0]= results[0][0]+(2*vertical);
-                results[0][1]=results[0][1]+(2*vertical);
-
-            }
 
         return results;
     }

@@ -65,8 +65,8 @@ public class PlyeBordControler {
 
     public void time() {
         numBlock = 4;
-        vertical = 0;
-        horizontally = 0;
+        vertical = 1;
+        horizontally = 1;
 
         Timeline timeline1 = new Timeline();
 
