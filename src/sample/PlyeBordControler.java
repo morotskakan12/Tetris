@@ -3,27 +3,17 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-import javax.swing.*;
-import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 
 public class PlyeBordControler {
@@ -43,7 +33,16 @@ public class PlyeBordControler {
     Button höger =new Button();
     Button venster = new Button();
     Button ner = new Button();
+    int conterOne = 0;
+    int conterTwo = 0;
+    @FXML
+    private void handleOnKeyReleased(KeyEvent event)
+    {
+        System.out.println(event.getCode() +" a key");
+    }
+
     public void initialize() throws IOException {
+        //        timerOne.scheduleAtFixedRate(taskOne,2000,2000);
         _gameFild.setMinWidth(250);
         _gameFild.setMinHeight(500);
         _gameFild.getStyleClass().add("gameFild");
@@ -58,43 +57,49 @@ public class PlyeBordControler {
 
        }
 
-
-
-
-
-
     public void time() {
-        numBlock = 4;
-        vertical = 1;
-        horizontally = 1;
+        numBlock = 6;
+        vertical = 3;
+        horizontally = 2;
 
         Timeline timeline1 = new Timeline();
 
         timeline1.setCycleCount(Timeline.INDEFINITE);
+        Timeline timeline2 = new Timeline();
+        timeline2.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(1.8),
+                e -> {
 
+                    System.out.println(conterTwo +" conterOne");
+                    System.out.println(conterOne + " conterTow");
+                    conterOne++;
+                    conterTwo++;
+                    _block = cbg.removBlockLayout(_block,horizontally,vertical);
+                    positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
+                    printArry(positonArry);
+                    vertical++;
+                }));
         timeline1.getKeyFrames().add(new KeyFrame(
                 Duration.seconds(2),
                 ae -> {
-
+                    conterTwo = 0;
+                    timeline2.stop();
+                    timeline2.play();
+                    System.out.println(conterOne);
+                    conterOne++;
+                    System.out.println(horizontally +" horesontaly");
+                    System.out.println(vertical +" vertical");
                     _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
 
                     positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
                     printArry(positonArry);
                     System.out.println(cbp.emtyPositon(positonArry,horizontally,vertical));
-                    if ((cbp.getPositonValu(positonArry,horizontally,vertical+2)==1)){
-                        printArry(positonArry);
-                        timeline1.stop();
-                    }else {
-                        Timeline timeline2 = new Timeline();
-                        timeline2.getKeyFrames().add(new KeyFrame(
-                                Duration.seconds(1),
-                                e -> {
-                        _block = cbg.removBlockLayout(_block,horizontally,vertical-1);
-                        positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical-1);
-                        printArry(positonArry);}));
-                        timeline2.play();
+                    if ((cbp.getPositonValu(positonArry,horizontally,vertical+4)==1)){
+                       printArry(positonArry);
+                       timeline2.stop();
+                       timeline1.stop();
                     }
-                                            vertical++;
+
 
 
                     System.out.println(vertical);
@@ -152,6 +157,7 @@ public class PlyeBordControler {
     public int  setRandomNumber(){
         return (int)(Math.random() * ((6) + 1));
     }
+
 
     public void handle(ActionEvent event) {
         if(event.getSource() == upp){

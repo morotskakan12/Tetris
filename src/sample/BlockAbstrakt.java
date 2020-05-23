@@ -31,6 +31,7 @@ abstract class BlockAbstrakt {
         return temp;
     }
     public Pane setBlock(Pane _gameBord, int horizontally, int vertical, Color fill, Color stroke){
+
             Rectangle rectangle = getBlock(fill,stroke);
             rectangle.setX(horizontally);
             rectangle.setY(vertical);
@@ -42,6 +43,7 @@ abstract class BlockAbstrakt {
         double [][] results = new double [1][2];
         double [][] temp = new double[1][2];
         double [][] matrix = new double[2][2];
+
         temp[0][0] = horizontally;
         temp[0][1] = vertical;
 
@@ -58,6 +60,8 @@ abstract class BlockAbstrakt {
 
         results[0][0] = results[0][0] + pivital[0][0];
         results[0][1] = results[0][1] + pivital[0][1];
+
+
         return results;
     }
 }

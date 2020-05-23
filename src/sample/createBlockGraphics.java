@@ -40,7 +40,7 @@ public class createBlockGraphics extends BlockAbstrakt {
 
         for (int e = 0; e<= 500;e= e+25) {
 
-            for (int i = 0; i <= 250; i = i+25) {
+            for (int i = 0; i <= 225; i = i+25) {
                 _gameBord = setBlock(_gameBord, i, e, Color.rgb(0, 0, 0), Color.rgb(115, 11, 11));
 
             }

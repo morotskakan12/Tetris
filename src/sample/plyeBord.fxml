@@ -16,6 +16,7 @@
 >
         <Pane
                 fx:id="_gameFild"
+                onKeyTyped="#handleOnKeyReleased"
         >
 
         </Pane>
