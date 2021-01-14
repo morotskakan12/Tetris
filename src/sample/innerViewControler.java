@@ -12,28 +12,36 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class innerViewControler {
+
+    /*
+        * kanppar
+        * navigering till starta spel
+        * nivå hantering
+        * avsluta
+        * länkad till plyeBord
+     */
     @FXML
-    GridPane _gridCenter;
+    GridPane _innerViewGridCenter;
     @FXML
-    VBox _vboxCenterGameSeting;
+    VBox _innerViewVboxCenterGameSeting;
     @FXML
     ImageView _imageViewCenterLog;
     @FXML
-    Button _buttonCenterGameStart;
+    Button _innerViewButtonCenterGameStart;
     @FXML
-    Button _buttonCenterGemeLevel;
+    Button _innerViewButtonCenterGemeLevel;
     @FXML
-    Button _buttonCneterExit;
+    Button _innerViewButtonCneterExit;
     public void initialize() {
-        _vboxCenterGameSeting.getStyleClass().add("vboxCenterGameSeting");
-        _buttonCenterGameStart.getStyleClass().add("buttonCenterGameStart");
-        _buttonCenterGemeLevel.getStyleClass().add("buttonCenterGemeLevel");
-        _buttonCneterExit.getStyleClass().add("buttonCneterExit");
-        _gridCenter.getStyleClass().add("gridCenter");
-        _vboxCenterGameSeting.setMargin(_imageViewCenterLog,new Insets(30,1,10,0));
-        _vboxCenterGameSeting.setMargin(_buttonCenterGameStart,new Insets(30,1,30,0));
-        _vboxCenterGameSeting.setMargin(_buttonCenterGemeLevel,new Insets(0,1,10,0));
-        _vboxCenterGameSeting.setMargin(_buttonCneterExit,new Insets(150,1,0,0));
+        _innerViewVboxCenterGameSeting.getStyleClass().add("vboxCenterGameSeting");
+        _innerViewButtonCenterGameStart.getStyleClass().add("buttonCenterGameStart");
+        _innerViewButtonCenterGemeLevel.getStyleClass().add("buttonCenterGemeLevel");
+        _innerViewButtonCneterExit.getStyleClass().add("buttonCneterExit");
+        _innerViewGridCenter.getStyleClass().add("gridCenter");
+        _innerViewVboxCenterGameSeting.setMargin(_imageViewCenterLog,new Insets(30,1,10,0));
+        _innerViewVboxCenterGameSeting.setMargin(_innerViewButtonCenterGameStart,new Insets(30,1,30,0));
+        _innerViewVboxCenterGameSeting.setMargin(_innerViewButtonCenterGemeLevel,new Insets(0,1,10,0));
+        _innerViewVboxCenterGameSeting.setMargin(_innerViewButtonCneterExit,new Insets(150,1,0,0));
 
     }
     public void onExitClick(ActionEvent actionEvent) {
@@ -42,7 +50,7 @@ public class innerViewControler {
 
     public void onButtonCenterGemeStart(ActionEvent actionEvent) throws IOException {
         GridPane pene = FXMLLoader.load(getClass().getResource("plyeBord.fxml"));
-        _gridCenter.getChildren().setAll(pene);
+        _innerViewGridCenter.getChildren().setAll(pene);
     }
     public void onButtonCenterGemeLevel(ActionEvent actionEvent){}
 }

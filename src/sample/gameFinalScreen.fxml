@@ -20,7 +20,7 @@
 
             <VBox
 
-                    fx:id="_vboxCenterGameFinal"
+                    fx:id="_fanalVboxCenter"
                     alignment="CENTER"
             >
                 <ImageView
@@ -40,17 +40,17 @@
                 </ImageView>
 
                 <Button
-                        fx:id="_buttonCenterGameRestart"
+                        fx:id="_fanalButtonCenterGameRestart"
                         text="Restart game"
                         onAction="#onButtonCenterGemeRetart"
                 ></Button>
                 <Button
-                        fx:id="_buttonCenterStartPage"
+                        fx:id="_fanalButtonCenterStartPage"
                         text="To startPage"
                         onAction="#onButtonCenterStartPage"
                 ></Button>
                 <Button
-                        fx:id="_buttonCneterExit"
+                        fx:id="_fanalButtonCneterExit"
                         text="Exit"
                         onAction="#onExitClick"
                 ></Button>

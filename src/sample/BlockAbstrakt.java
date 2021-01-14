@@ -6,17 +6,50 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 abstract class BlockAbstrakt {
+    /*
+        * grafick
+        * sparar vilket spel bolck som används
+        * ta bort och lägg till block
+        * roterar block
+        * skapar en raklangel till spelpjäserna
+     */
     private int numBlock;
-    public abstract Pane blockLayout(Pane _gameBord, int horizontally , int vertical);
-    public abstract Pane removBlockLayout(Pane _gameBord, int horizontally , int vertical);
-
 
     public void setNumBlock(int numBlock) {
         this.numBlock = numBlock;
     }
-
     public int getNumBlock() {
         return numBlock;
+    }
+
+    public abstract Pane blockLayout(Pane _gameBord, int horizontally , int vertical,int angelNum);
+    public abstract Pane removBlockLayout(Pane _gameBord, int horizontally , int vertical,int angelNum);
+
+
+    public double[][] rotate(double horizontally, double vertical,double angle,double [][] matrixIn){
+        double [][] matrixResults = new double [1][2];
+        double [][] matrixTemp = new double[1][2];
+        double [][] matrixTrigonometry = new double[2][2];
+
+        matrixTemp[0][0] = horizontally;
+        matrixTemp[0][1] = vertical;
+
+        matrixTemp[0][0] = matrixTemp[0][0] - matrixIn[0][0];
+        matrixTemp[0][1] = matrixTemp[0][1] - matrixIn[0][1];
+
+        matrixTrigonometry[0][0]=Math.round(Math.cos(angle));
+        matrixTrigonometry[1][0]=Math.round(-(Math.sin(angle)));
+        matrixTrigonometry[0][1]=Math.round(Math.sin(angle));
+        matrixTrigonometry[1][1]=Math.round(Math.cos(angle));
+
+        matrixResults[0][0]=((matrixTrigonometry[0][0]*matrixTemp[0][0])+(matrixTrigonometry[1][0]*matrixTemp[0][1]));
+        matrixResults[0][1]=((matrixTrigonometry[0][1]*matrixTemp[0][0])+(matrixTrigonometry[1][1]*matrixTemp[0][1]));
+
+        matrixResults[0][0] = matrixResults[0][0] + matrixIn[0][0];
+        matrixResults[0][1] = matrixResults[0][1] + matrixIn[0][1];
+
+
+        return matrixResults;
     }
 
     public Rectangle getBlock(Color fill, Color stroke){
@@ -32,36 +65,24 @@ abstract class BlockAbstrakt {
     }
     public Pane setBlock(Pane _gameBord, int horizontally, int vertical, Color fill, Color stroke){
 
-            Rectangle rectangle = getBlock(fill,stroke);
-            rectangle.setX(horizontally);
-            rectangle.setY(vertical);
-            _gameBord.getChildren().add(rectangle);
+        Rectangle rectangle = getBlock(fill,stroke);
+        rectangle.setX(horizontally);
+        rectangle.setY(vertical);
+        _gameBord.getChildren().add(rectangle);
 
         return _gameBord;
     }
-    public double[][] rotate(double horizontally, double vertical,double angle,double [][] pivital){
-        double [][] results = new double [1][2];
-        double [][] temp = new double[1][2];
-        double [][] matrix = new double[2][2];
+    public double getAngle (int position){
 
-        temp[0][0] = horizontally;
-        temp[0][1] = vertical;
-
-        temp[0][0] = temp[0][0] - pivital[0][0];
-        temp[0][1] = temp[0][1] - pivital[0][1];
-
-        matrix[0][0]=Math.round(Math.cos(angle));
-        matrix[1][0]=Math.round(-(Math.sin(angle)));
-        matrix[0][1]=Math.round(Math.sin(angle));
-        matrix[1][1]=Math.round(Math.cos(angle));
-
-        results[0][0]=((matrix[0][0]*temp[0][0])+(matrix[1][0]*temp[0][1]));
-        results[0][1]=((matrix[0][1]*temp[0][0])+(matrix[1][1]*temp[0][1]));
-
-        results[0][0] = results[0][0] + pivital[0][0];
-        results[0][1] = results[0][1] + pivital[0][1];
-
-
-        return results;
+        if (position ==1 ){
+            return Math.PI/2;
+        }else if (position == 2){
+            return (Math.PI);
+        } else if (position == 3){
+            return ((Math.PI*3)/2);
+        }else {
+            return 0;
+        }
     }
+
 }

@@ -2,7 +2,7 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -10,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -17,138 +19,287 @@ import java.io.IOException;
 
 
 public class PlyeBordControler {
+    /*
+        * Spel plan
+        * kordinat system
+        * tid hantering
+        * länkad till gameFinalScreen
+     */
+
     @FXML
-    GridPane _contaner;
+    GridPane _plyeBordContaner;
     @FXML
-    Pane _gameFild;
+    Pane _plyeBordGameFild;
+
+    GridPane _textContaner= new GridPane();
+    Text _textPointsCount = new Text();
+    Text _pointsCount = new Text();
+    Text _textLevelCount = new Text();
+    Text _levelCount = new Text();
+
+
     Pane _block = new Pane();
-    createBlockGraphics cbg = new createBlockGraphics();
-    createBlockPosion cbp = new createBlockPosion();
-    int[][] positonArry = new int[10][21];
-    int numRot;
+    createBlockGraphics createBlockG = new createBlockGraphics();
+    createBlockPosion createBlockP = new createBlockPosion();
+    int[][] positonArry = new int[12][22];
     int numBlock;
     int horizontally;
     int vertical;
-    Button upp = new Button();
-    Button höger =new Button();
-    Button venster = new Button();
-    Button ner = new Button();
-    int conterOne = 0;
-    int conterTwo = 0;
-    @FXML
-    private void handleOnKeyReleased(KeyEvent event)
-    {
-        System.out.println(event.getCode() +" a key");
-    }
+    int angleNum;
+    int points = 0;
+    int numberOfRow;
+    int indexLevel = 1;
+    double[] level = new double[26];
+    Timeline timelineAnimation = new Timeline();
+    Button buttonWisobiletyFals = new Button();
+
+
 
     public void initialize() throws IOException {
-        //        timerOne.scheduleAtFixedRate(taskOne,2000,2000);
-        _gameFild.setMinWidth(250);
-        _gameFild.setMinHeight(500);
-        _gameFild.getStyleClass().add("gameFild");
+        _plyeBordGameFild.setMinWidth(250);
+        _plyeBordGameFild.setMinHeight(500);
+        _plyeBordGameFild.getStyleClass().add("gameFild");
+        _pointsCount.getStyleClass().add("textPoints");
+        _pointsCount.setFill(Color.WHITE);
+        _pointsCount.setText("" + points);
 
+        _levelCount.getStyleClass().add("textPoints");
+        _levelCount.setFill(Color.WHITE);
+        _levelCount.setText("" + indexLevel);
 
-        cbg.setGameBord(_gameFild);
-        positonArry = cbp.blockPositon(positonArry,0,0);
+        _textPointsCount.getStyleClass().add("textPoints");
+        _textPointsCount.setFill(Color.WHITE);
+        _textPointsCount.setText("points ");
+
+        _textLevelCount.getStyleClass().add("textPoints");
+        _textLevelCount.setFill(Color.WHITE);
+        _textLevelCount.setText("Level ");
+
+        buttonWisobiletyFals.setMinHeight(100);
+        buttonWisobiletyFals.setMinWidth(200);
+        _plyeBordGameFild.getChildren().add(buttonWisobiletyFals);
+        createBlockG.setGameBord(_plyeBordGameFild);
+        positonArry = createBlockP.blockPositon(positonArry,0,0,angleNum);
         printArry(positonArry);
-                _gameFild.getChildren().add(_block);
-
-          this.time();
-
+        _plyeBordGameFild.getChildren().add(_block);
+        _textContaner.add(_textPointsCount,0,0);
+        _textContaner.add(_pointsCount,0,1);
+        _textContaner.add(_textLevelCount,0,2);
+        _textContaner.add(_levelCount,0,3);
+        _plyeBordContaner.add(_textContaner,1,0);
+        numBlock = setRandomNumber();
+        level = setLevel(level);
+        vertical = 0;
+        angleNum = 0;
+        horizontally = 4;
+        this.event();
+        this.gameLopp();
+        this.timeAnimatin();
        }
 
-    public void time() {
-        numBlock = 6;
-        vertical = 3;
-        horizontally = 2;
 
-        Timeline timeline1 = new Timeline();
 
-        timeline1.setCycleCount(Timeline.INDEFINITE);
-        Timeline timeline2 = new Timeline();
-        timeline2.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(1.8),
-                e -> {
+    public void gameLopp() {
 
-                    System.out.println(conterTwo +" conterOne");
-                    System.out.println(conterOne + " conterTow");
-                    conterOne++;
-                    conterTwo++;
-                    _block = cbg.removBlockLayout(_block,horizontally,vertical);
-                    positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
-                    printArry(positonArry);
-                    vertical++;
-                }));
-        timeline1.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(2),
-                ae -> {
-                    conterTwo = 0;
-                    timeline2.stop();
-                    timeline2.play();
-                    System.out.println(conterOne);
-                    conterOne++;
-                    System.out.println(horizontally +" horesontaly");
-                    System.out.println(vertical +" vertical");
-                    _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
+        if ((vertical==0)&&(createBlockP.emtyPositon(positonArry,horizontally,vertical,angleNum)==true)){
 
-                    positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
-                    printArry(positonArry);
-                    System.out.println(cbp.emtyPositon(positonArry,horizontally,vertical));
-                    if ((cbp.getPositonValu(positonArry,horizontally,vertical+4)==1)){
-                       printArry(positonArry);
-                       timeline2.stop();
-                       timeline1.stop();
+            try {
+
+                chenge();
+            } catch (IOException ioException) {
+
+                ioException.printStackTrace();
+
+            }
+        }else {
+            timelineAnimation.stop();
+            _block = createBlockG.getGemeBlock(_block, horizontally, vertical, numBlock, angleNum);
+            positonArry = createBlockP.getGemeBlock(positonArry, horizontally, vertical, numBlock, angleNum);
+
+            printArry(positonArry);
+
+                timelineAnimation.setDelay(Duration.seconds(level[indexLevel]));
+
+                timelineAnimation.playFromStart();
+
+        }
+
+
+    }
+    public void timeAnimatin(){
+    timelineAnimation = new Timeline(new KeyFrame(Duration.seconds(0.01), ev -> {
+
+
+        _block = createBlockG.removBlockLayout(_block,horizontally,vertical,angleNum);
+        positonArry = createBlockP.removBlockPositon(positonArry,horizontally,vertical,angleNum);
+
+
+        if (createBlockP.emtyPositon(positonArry,horizontally,vertical+1,angleNum)) {
+
+            _block = createBlockG.getGemeBlock(_block, horizontally, vertical, numBlock,angleNum);
+            positonArry = createBlockP.getGemeBlock(positonArry, horizontally, vertical, numBlock,angleNum);
+
+            printArry(positonArry);
+
+
+
+
+            if ((vertical==0)&&(createBlockP.emtyPositon(positonArry,horizontally,vertical,angleNum)==true)){
+                try {
+
+                    chenge();
+                } catch (IOException ioException) {
+
+                    ioException.printStackTrace();
+
+                }
+            }else {
+
+                positonArry = clerPosition(positonArry);
+                vertical = 0;
+                horizontally = 4;
+                angleNum = 0;
+                numBlock = setRandomNumber();
+                if(numberOfRow==5){
+                    numberOfRow=0;
+                    if (indexLevel==25){}else{
+                        indexLevel++;
+                        _levelCount.setText("" + indexLevel);
                     }
 
+                }
+                gameLopp();
 
+            }
+        }else {
 
-                    System.out.println(vertical);
-
-
-                    /*numRot = numRot+90;
-                    rot(_block,numRot);*/
-               }));
-
-
-     Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(60),
-                ae -> {
-                    try {
-                        chenge();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }));
-
-
-       timeline1.playFromStart();
-
-
-        //timeline.play();
+            _block = createBlockG.removBlockLayout(_block, horizontally, vertical, angleNum);
+            positonArry = createBlockP.removBlockPositon(positonArry, horizontally, vertical, angleNum);
+            vertical++;
+            gameLopp();
+        }
+    }));
+        timelineAnimation.setCycleCount(Timeline.INDEFINITE);
+        timelineAnimation.play();
     }
 
 
+
+
+
+     public void event (){
+         buttonWisobiletyFals.setOnKeyPressed(new EventHandler<KeyEvent>() {
+             @Override
+             public void handle(KeyEvent t) {
+
+                if (t.getCode() == KeyCode.W){
+                    timelineAnimation.pause();
+
+                    _block = createBlockG.removBlockLayout(_block,horizontally,vertical,angleNum);
+                    positonArry = createBlockP.removBlockPositon(positonArry,horizontally,vertical,angleNum);
+                        if (angleNum== 3){
+                            if (createBlockP.emtyPositon(positonArry,horizontally,vertical,0)==false){
+
+                                angleNum = 0;
+                            }
+                        }else {
+
+                            if (createBlockP.emtyPositon(positonArry,horizontally,vertical,angleNum+1)==false){
+
+                                angleNum++;
+                            }
+                        }
+                    _block = createBlockG.getGemeBlock(_block,horizontally,vertical,numBlock,angleNum);
+                    positonArry = createBlockP.getGemeBlock(positonArry,horizontally,vertical,numBlock,angleNum);
+
+
+                    timelineAnimation.play();
+
+                }else if(t.getCode()== KeyCode.A){
+                    timelineAnimation.pause();
+
+
+                    _block = createBlockG.removBlockLayout(_block, horizontally, vertical,angleNum);
+                    positonArry = createBlockP.removBlockPositon(positonArry, horizontally, vertical,angleNum);
+
+                    if (createBlockP.emtyPositon(positonArry,horizontally-1,vertical,angleNum)==false){
+
+
+                        horizontally--;
+
+                    }
+                    _block = createBlockG.getGemeBlock(_block, horizontally, vertical, numBlock,angleNum);
+                    positonArry = createBlockP.getGemeBlock(positonArry, horizontally, vertical, numBlock,angleNum);
+
+                    timelineAnimation.play();
+
+
+                }else if (t.getCode() == KeyCode.D){
+                    timelineAnimation.pause();
+
+
+                    _block = createBlockG.removBlockLayout(_block, horizontally, vertical,angleNum);
+                    positonArry = createBlockP.removBlockPositon(positonArry, horizontally, vertical,angleNum);
+
+                    if (createBlockP.emtyPositon(positonArry,horizontally+1,vertical,angleNum)==false){
+
+                        horizontally++;
+
+                    }
+                    _block = createBlockG.getGemeBlock(_block, horizontally, vertical, numBlock,angleNum);
+                    positonArry = createBlockP.getGemeBlock(positonArry, horizontally, vertical, numBlock,angleNum);
+
+                    timelineAnimation.play();
+
+                }else if (t.getCode() == KeyCode.S){
+                    timelineAnimation.pause();
+
+
+
+                    _block = createBlockG.removBlockLayout(_block, horizontally, vertical,angleNum);
+                    positonArry = createBlockP.removBlockPositon(positonArry, horizontally, vertical,angleNum);
+                    if (createBlockP.emtyPositon(positonArry,horizontally,vertical+1,angleNum)==false){
+                        points = points+(1*indexLevel);
+                        _pointsCount.setText("" + points);
+                        vertical++;
+
+                    }
+                    _block = createBlockG.getGemeBlock(_block, horizontally, vertical, numBlock,angleNum);
+                    positonArry = createBlockP.getGemeBlock(positonArry, horizontally, vertical, numBlock,angleNum);
+
+                    timelineAnimation.play();
+
+
+                }else {
+
+
+                }
+
+             }
+         });
+
+     }
     public void chenge() throws IOException {
-        GridPane pene = FXMLLoader.load(getClass().getResource("gameFinalScreen.fxml"));
-        _contaner.getChildren().setAll(pene);
-    }
-    public Pane rot(Pane block,int i ){
 
-        block.rotateProperty().setValue(i);
-        return block;
+        timelineAnimation.stop();
+        GridPane pene = FXMLLoader.load(getClass().getResource("gameFinalScreen.fxml"));
+        _plyeBordContaner.getChildren().setAll(pene);
     }
+
     public void printArry(int [][] positonArry){
 
-
-            for (int j = 0; j < 21; j++) {
-                for (int i = 0; i < 10; i++) {
-                if (j == 20){
-                    System.out.print(i+" ");
+        for (int i = 0; i < 22; i++) {
+            for (int e = 0; e < 12; e++) {
+                if (i == 21){
+                    if(e >= 10){
+                        System.out.print(e);
+                    }else
+                    System.out.print(e+" ");
                 }else
-                    System.out.print(positonArry[i][j]+" ");
+                    System.out.print(positonArry[e][i]+" ");
             }
-            if(j!=20){
-                System.out.println(j);
+            if(i!=21){
+                System.out.println(i);
             }
         }
         System.out.println(" ");
@@ -157,60 +308,34 @@ public class PlyeBordControler {
     public int  setRandomNumber(){
         return (int)(Math.random() * ((6) + 1));
     }
+    public int[][] clerPosition(int[][] positonArry) {
+        int number = 0;
+        for (int i = 19; i > 0; i--) {
 
+            if ( createBlockP.clerPosition(positonArry,i)) {
+                number++;
+                for (int z = i;z>0;z--){
+                    for (int e = 1; e <= 10; e++) {
+                            positonArry = createBlockP.setPositon(positonArry,e,z,positonArry[e][z-1]);
+                            _block = createBlockG.clerPosition(_block,e,z,positonArry[e][z-1]);
 
-    public void handle(ActionEvent event) {
-        if(event.getSource() == upp){
-
-            _block = cbg.removBlockLayout(_block,horizontally,vertical);
-            positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
-            if(numRot== 4){
-                numRot = 0;
-
-            }else {
-                numRot++;
-            }
-            _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
-            positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
-        }
-        if(event.getSource() == ner){
-
-            _block = cbg.removBlockLayout(_block,horizontally,vertical);
-            positonArry = cbp.removBlockPositon(positonArry,horizontally,vertical);
-                 while (cbp.getPositonValu(positonArry,horizontally,vertical+1)==0){
-                    vertical++;
-
+                    }
                 }
-            _block = cbg.getGemeBlock(_block,horizontally,vertical,numBlock);
-            positonArry = cbp.getGemeBlock(positonArry,horizontally,vertical,numBlock);
-        }
-        if(event.getSource() == höger){
-            if (cbp.getPositonValu(positonArry,horizontally+1,vertical)==0) {
-                _block = cbg.removBlockLayout(_block, horizontally, vertical);
-                positonArry = cbp.removBlockPositon(positonArry, horizontally, vertical);
+                points=(points)+(10*number*indexLevel);
+                numberOfRow++;
 
-                horizontally++;
-
-                _block = cbg.getGemeBlock(_block, horizontally, 19, numBlock);
-                positonArry = cbp.getGemeBlock(positonArry, horizontally, 19, numBlock);
+                _pointsCount.setText("" + points);
+                i++;
             }
+
         }
-        if(event.getSource() == venster){
-            if (cbp.getPositonValu(positonArry,horizontally-1,vertical)==0){
-                _block = cbg.removBlockLayout(_block, horizontally, vertical);
-                positonArry = cbp.removBlockPositon(positonArry, horizontally, vertical);
-
-                horizontally--;
-
-                _block = cbg.getGemeBlock(_block, horizontally, 19, numBlock);
-                positonArry = cbp.getGemeBlock(positonArry, horizontally, 19, numBlock);
-            }
-        }
-
+        return positonArry;
+    }
+    public double[] setLevel(double[] level){
+         for ( int i = 0; i < 26; i++){
+             level[i]= (-i*0.05)+1.3;
+         }
+        return level;
     }
 
-
-
 }
-
-

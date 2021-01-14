@@ -15,64 +15,64 @@ import java.io.IOException;
 
 
 public class Controller {
+    /*
+        * bagrund
+        * positonering av boxar
+        * länkad till innerView
 
+    */
     @FXML
-    GridPane _gridTop;
+    GridPane _controllerGridTop;
     @FXML
-    HBox _hboxTop;
+    HBox _controllerHboxTop;
     @FXML
     ImageView _imageViewTop;
+    @FXML
+    GridPane _controllerGridLeft;
+    @FXML
+    VBox _controllerVboxLeft;
+    @FXML
+    Pane _controllerPeneLeft;
+    @FXML
+    Pane _controllerPeneLeft2;
+    @FXML
+    GridPane _controllerGridRight;
+    @FXML
+    VBox _controllerVboxRhigt;
+    @FXML
+    Pane _controllerPeneRhigt;
+    @FXML
+    Pane _controllerPeneRhigt2;
+    @FXML
+    GridPane _controllerGridBottom;
 
     @FXML
-    GridPane _gridLeft;
+    GridPane _controllerGridCenter;
     @FXML
-    VBox _vboxLeft;
-    @FXML
-    Pane _peneLeft;
-    @FXML
-    Pane _peneLeft2;
-    @FXML
-    GridPane _gridRight;
-    @FXML
-    VBox _vboxRhigt;
-    @FXML
-    Pane _peneRhigt;
-    @FXML
-    Pane _peneRhigt2;
-    @FXML
-    GridPane _gridBottom;
-
-    @FXML
-    GridPane _gridCenter;
-    @FXML
-
-
 
 
     public void initialize() throws IOException {
-        _gridTop.getStyleClass().add("gridTop");
-        _hboxTop.getStyleClass().add("hboxTop");
-        _gridBottom.getStyleClass().add("gridBottom");
-        _gridLeft.getStyleClass().add("gridLeft");
-        _gridRight.getStyleClass().add("gridRiht");
-        _peneRhigt.getStyleClass().add("peneRhigt");
-        _peneRhigt2.getStyleClass().add("peneRhigt2");
-        _peneLeft2.getStyleClass().add("peneRLeft2");
-        _peneLeft.getStyleClass().add("peneRLeft");
-        _gridCenter.getStyleClass().add("gridCenter");
+        _controllerGridTop.getStyleClass().add("controllerGridTop");
+        _controllerHboxTop.getStyleClass().add("hboxTop");
+        _controllerGridBottom.getStyleClass().add("gridBottom");
+        _controllerGridLeft.getStyleClass().add("gridLeft");
+        _controllerGridRight.getStyleClass().add("gridRiht");
+        _controllerPeneRhigt.getStyleClass().add("peneRhigt");
+        _controllerPeneRhigt2.getStyleClass().add("peneRhigt2");
+        _controllerPeneLeft.getStyleClass().add("peneRLeft");
+        _controllerPeneLeft2.getStyleClass().add("peneRLeft2");
+        _controllerGridCenter.getStyleClass().add("gridCenter");
 
-        
-
-        _vboxLeft.setMargin(_peneLeft,new Insets(1,1,50,1));
-        _vboxRhigt.setMargin(_peneRhigt,new Insets(1,1,50,1));
-        _vboxRhigt.setMargin(_peneRhigt2,new Insets(1,1,150,1));
-        _vboxLeft.setMargin(_peneLeft2,new Insets(1,1,150,1));
-        _hboxTop.setMargin(_imageViewTop,new Insets(1,1,1,35));
+        _controllerVboxLeft.setMargin(_controllerPeneLeft,new Insets(1,1,50,1));
+        _controllerVboxRhigt.setMargin(_controllerPeneRhigt,new Insets(1,1,50,1));
+        _controllerVboxRhigt.setMargin(_controllerPeneRhigt2,new Insets(1,1,150,1));
+        _controllerVboxLeft.setMargin(_controllerPeneLeft2,new Insets(1,1,150,1));
+        _controllerHboxTop.setMargin(_imageViewTop,new Insets(1,1,1,35));
         chenge();
     }
     public void chenge() throws IOException {
         GridPane pene = FXMLLoader.load(getClass().getResource("innerView.fxml"));
-        _gridCenter.getChildren().setAll(pene);
+        _controllerGridCenter.getChildren().setAll(pene);
     }
 
 

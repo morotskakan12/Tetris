@@ -26,11 +26,11 @@
         >
             <top>
                 <GridPane
-                        fx:id="_gridTop"
+                        fx:id="_controllerGridTop"
                         alignment="CENTER"
                 >
                     <HBox
-                            fx:id="_hboxTop"
+                            fx:id="_controllerHboxTop"
                     >
                     <ImageView
                             fx:id="_imageViewTop"
@@ -54,7 +54,7 @@
                     <GridPane
                             xmlns="http://javafx.com/javafx"
                             xmlns:fx="http://javafx.com/fxml"
-                            fx:id="_gridCenter"
+                            fx:id="_controllerGridCenter"
                             alignment="CENTER"
                     >
 
@@ -64,36 +64,36 @@
             </center>
             <bottom>
                 <GridPane
-                        fx:id="_gridBottom"
+                        fx:id="_controllerGridBottom"
                 ></GridPane>
             </bottom>
             <left>
                 <GridPane
-                        fx:id="_gridLeft"
+                        fx:id="_controllerGridLeft"
                         alignment="CENTER">
                     <VBox
-                            fx:id="_vboxLeft"
+                            fx:id="_controllerVboxLeft"
                     >
                         <Pane
-                                fx:id="_peneLeft"
+                                fx:id="_controllerPeneLeft"
                         ></Pane>
                         <Pane
-                                fx:id="_peneLeft2"
+                                fx:id="_controllerPeneLeft2"
                         ></Pane>
                     </VBox>
                 </GridPane>
             </left>
             <right>
                 <GridPane
-                        fx:id="_gridRight"
+                        fx:id="_controllerGridRight"
                         alignment="CENTER"
                 >
-                    <VBox fx:id="_vboxRhigt">
+                    <VBox fx:id="_controllerVboxRhigt">
                         <Pane
-                                fx:id="_peneRhigt"
+                                fx:id="_controllerPeneRhigt"
                         ></Pane>
                         <Pane
-                                fx:id="_peneRhigt2"
+                                fx:id="_controllerPeneRhigt2"
                         ></Pane>
                     </VBox>
                 </GridPane>

@@ -14,14 +14,14 @@
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="sample.innerViewControler"
-        fx:id="_gridCenter"
+        fx:id="_innerViewGridCenter"
         alignment="CENTER"
 
 
     >
         <VBox
 
-                fx:id="_vboxCenterGameSeting"
+                fx:id="_innerViewVboxCenterGameSeting"
                 alignment="CENTER"
         >
             <ImageView
@@ -41,17 +41,17 @@
             </ImageView>
 
             <Button
-                    fx:id="_buttonCenterGameStart"
+                    fx:id="_innerViewButtonCenterGameStart"
                     text="Start"
                     onAction="#onButtonCenterGemeStart"
             ></Button>
             <Button
-                    fx:id="_buttonCenterGemeLevel"
+                    fx:id="_innerViewButtonCenterGemeLevel"
                     text="Level"
                     onAction="#onButtonCenterGemeLevel"
             ></Button>
             <Button
-                    fx:id="_buttonCneterExit"
+                    fx:id="_innerViewButtonCneterExit"
                     text="Exit"
                     onAction="#onExitClick"
             ></Button>

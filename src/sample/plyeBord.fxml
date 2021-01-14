@@ -6,19 +6,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.text.Text?>
 <GridPane
         stylesheets="/sample/styl.css"
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="sample.PlyeBordControler"
-        fx:id="_contaner"
+        fx:id="_plyeBordContaner"
 
 >
         <Pane
-                fx:id="_gameFild"
-                onKeyTyped="#handleOnKeyReleased"
+                fx:id="_plyeBordGameFild"
+
         >
 
         </Pane>
 
+
+
+
 </GridPane>
+

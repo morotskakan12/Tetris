@@ -4,20 +4,21 @@ import java.util.ArrayList;
 
 public class createBlockPosion extends PositonAbstrakt {
     @Override
-    public int[][] blockPositon(int[][] positonArry, int horizontally, int vertical) {
-        for(int i = vertical; i <21;i++){
-            for(int e = horizontally; e <10;e++){
-                if(i == 20){
-                    positonArry = setPositon(positonArry,e,i,1);
-                }else {
-                    positonArry = setPositon(positonArry, e, i, 0);
+    public int[][] blockPositon(int[][] positonArry, int horizontally, int vertical, int angleNum) {
+        for (int i = horizontally; i < 12; i++) {
+            for (int e = vertical; e < 21; e++) {
+                if ((e == 20) || (i == 0) || (i == 11)) {
+                    positonArry = setPositon(positonArry, i, e, 1);
+                } else {
+                    positonArry = setPositon(positonArry, i, e, 0);
                 }
             }
         }
 
         return positonArry;
     }
-    public int[][] getGemeBlock(int[][] positonArry,int horizontally, int vertical,int numBlock){
+
+    public int[][] getGemeBlock(int[][] positonArry, int horizontally, int vertical, int numBlock, int angleNum) {
 
         ArrayList<PositonAbstrakt> typsOfGemeBrick = new ArrayList<PositonAbstrakt>();
         typsOfGemeBrick.add(new blockBluePositon());//klar 0
@@ -30,13 +31,14 @@ public class createBlockPosion extends PositonAbstrakt {
         setNumBlock(numBlock);
         PositonAbstrakt block = typsOfGemeBrick.get(getNumBlock());
 
-        positonArry = block.blockPositon(positonArry,horizontally,vertical);
+        positonArry = block.blockPositon(positonArry, horizontally, vertical, angleNum);
 
 
         return positonArry;
     }
+
     @Override
-    public int [][] removBlockPositon(int[][] positonArry, int horizontally, int vertical) {
+    public int[][] removBlockPositon(int[][] positonArry, int horizontally, int vertical, int angleNum) {
         ArrayList<PositonAbstrakt> typsOfGemeBrick = new ArrayList<PositonAbstrakt>();
         typsOfGemeBrick.add(new blockBluePositon());//klar 0
         typsOfGemeBrick.add(new blockYelloPositon());//klar 1
@@ -48,14 +50,15 @@ public class createBlockPosion extends PositonAbstrakt {
         setNumBlock(getNumBlock());
         PositonAbstrakt block = typsOfGemeBrick.get(getNumBlock());
 
-        positonArry = block.removBlockPositon(positonArry,horizontally,vertical);
+        positonArry = block.removBlockPositon(positonArry, horizontally, vertical, angleNum);
 
 
         return positonArry;
     }
 
     @Override
-    public boolean emtyPositon(int[][] positonArry, int horizontally, int vertical) {
+    public boolean emtyPositon(int[][] positonArry, int horizontally, int vertical, int angleNum) {
+
         ArrayList<PositonAbstrakt> typsOfGemeBrick = new ArrayList<PositonAbstrakt>();
         typsOfGemeBrick.add(new blockBluePositon());//klar 0
         typsOfGemeBrick.add(new blockYelloPositon());//klar 1
@@ -67,6 +70,16 @@ public class createBlockPosion extends PositonAbstrakt {
         setNumBlock(getNumBlock());
         PositonAbstrakt block = typsOfGemeBrick.get(getNumBlock());
 
-        return block.emtyPositon(positonArry,horizontally,vertical);
+        return block.emtyPositon(positonArry, horizontally, vertical, angleNum);
     }
+    public boolean clerPosition(int[][] positonArry, int vertical) {
+
+        for (int i = 1; i <= 10; i++) {
+            if (getPositonValu(positonArry, i, vertical) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
